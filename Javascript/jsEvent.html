@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event and Function related to JS</title>
+</head>
+<style>
+:root {
+    --primary-color: #4a90e2;
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-color: #333;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    margin: 0;
+}
+
+#demo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    width: 250px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-size: 0.85rem;
+    z-index: 100;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 15px;
+    margin-top: 50px;
+    background: transparent;
+}
+
+td {
+    background: var(--card-bg);
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    width: 150px;
+    height: 100px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-weight: 600;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+td:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+
+td div {
+    height: 60px;
+    font-size: 0.7rem;
+    font-weight: normal;
+    overflow-y: scroll;
+    border: 1px solid #eee;
+    padding: 5px;
+    margin-top: 10px;
+    background: #fafafa;
+}
+
+input {
+    width: 80%;
+    margin-top: 5px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+</style>
+<body>
+    <p id="demo"></p>
+    <table border="1px">
+
+        <tr>
+            <td id="1" contenteditable="true">Click Event</td>
+            <td id="2" contenteditable="true">doubleClick</td>
+            <td id="3" contenteditable="true">Mouseover</td>
+            
+        </tr>
+        <tr>
+            
+            <td id="4" contenteditable="true">Mouse Down</td>
+            <td id="5" contenteditable="true">Mouse up</td>
+            <td id="6"contenteditable="true">mousemove</td>          
+        </tr>
+         <tr>
+            <td id="7" contenteditable="true">Key Down</td>
+            <td id="8" contenteditable="true">key Up</td>
+            <td id="9" contenteditable="true">Load Event</td>          
+        </tr>
+        <tr>
+            <td id="10" contenteditable="true"><input type="text" size="1">Change</td>
+            <td id="11" contenteditable="true">Blur</td>
+            <td id="12" contenteditable="true">Copy Event</td>
+        </tr>
+         <tr>
+            <td id="cell-13" contenteditable="true">Scroll Event
+                <div>my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since.'Whenever you feel like criticizing anyone,' he told me, just remember that all the people in this world haven't had the advantages that you've had.'</div></td>
+            <td id="14" contenteditable="true">Focus</td>
+            <td id="15" contenteditable="true">Focus Out</td>          
+        </tr>
+        <tr>
+            <td id="16" contenteditable="true">Key Press</td>
+            <td id="17" contenteditable="true">contextMenu</td>
+            <td id="18" contenteditable="true">Focus In</td>
+        </tr>
+        <tr>
+            <td id="19" >Drag Start</td>
+            <td id="20" contenteditable="true">Drag End</td>
+            <td id="21" contenteditable="true">Touch Event</td>
+        </tr>
+    </table>
+
+    <script src="jsEvent.js"></script>
+</body>
+</html>
+
+    <!-- <script>
+        const logBox = document.getElementById("demo");
+
+
+function log(message) {
+    const time = new Date().toLocaleTimeString().split(' ')[0];
+    logBox.innerHTML = `<div><small>${time}</small>: ${message}</div>` + logBox.innerHTML;
+}
+
+
+const events = [
+    { id: "1", type: "click", msg: "Click Event" },
+    { id: "2", type: "dblclick", msg: "Double Click" },
+    { id: "3", type: "mouseover", msg: "Mouse Over" },
+    { id: "4", type: "mousedown", msg: "Mouse Down" },
+    { id: "5", type: "mouseup", msg: "Mouse Up" },
+    { id: "6", type: "mousemove", msg: "Mouse Moving..." },
+    { id: "7", type: "keydown", msg: (e) => `Key Down: ${e.key}` },
+    { id: "8", type: "keyup", msg: (e) => `Key Up: ${e.key}` },
+    { id: "9", type: "load", msg: "Load Complete" },
+    { id: "11", type: "blur", msg: "Blur (Lost Focus)" },
+    { id: "12", type: "copy", msg: "Text Copied!" },
+    { id: "14", type: "focus", msg: "Focused!" },
+    { id: "15", type: "focusout", msg: "Focus Out" },
+    { id: "16", type: "keypress", msg: (e) => `Key Press: ${e.key}` },
+    { id: "17", type: "contextmenu", msg: "Right Click Menu" },
+    { id: "18", type: "focusin", msg: "Focus In (Bubbled)" },
+    { id: "19", type: "dragstart", msg: "Drag Started" },
+    { id: "20", type: "dragend", msg: "Drag Ended" },
+    { id: "21", type: "touchend", msg: "Touch Ended" }
+];
+
+
+events.forEach(item => {
+    const el = document.getElementById(item.id);
+    if (el) {
+        el.addEventListener(item.type, (e) => {
+            const message = typeof item.msg === 'function' ? item.msg(e) : item.msg;
+            log(message);
+        });
+    }
+});
+
+
+document.getElementById("10").addEventListener("change", (e) => {
+    log(`Changed to: ${e.target.value}`);
+});
+
+const scrollDiv = document.querySelector("#cell-13 div");
+scrollDiv.addEventListener("scroll", () => {
+    log("Scrolling internal div...");
+});
+    </script> -->

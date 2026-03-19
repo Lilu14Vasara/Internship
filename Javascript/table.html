@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    table {
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    td {
+        text-align: center;
+        border: 1px solid black;
+    }
+</style>
+    
+</head>
+<body>
+
+   
+    <form>
+        <label>Enter Row</label>
+        <input type="text" id="row">
+        <br><br>
+
+        <label>Enter Column</label>
+        <input type="text" id="col">
+        <br><br>
+
+        <button  type="button" onclick="createTable()">Show Table</button>
+    </form>
+    <br>
+    <div id="tableContent"></div>
+<button type="button" onclick="addrow()">ADD Row</button>
+<button type="button" onclick="deleteRow()">DELETE Row</button>
+<button type="button" onclick="addColumn()">ADD Column</button>
+<button type="button" onclick="deleteColumn()">DELETE Column</button>
+
+    <script src="table.js"></script>
+</body>
+</html>

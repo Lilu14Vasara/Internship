@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <style>
+        table{
+            height: 400px;
+            width: 400px;
+            margin: auto;
+            margin-top: 250px;
+            border-collapse: collapse;
+            
+        }
+        td{
+            text-align: center;
+        }
+      
+        #squre{
+            color: white;
+            border: none;
+            border-right: none;
+            border-left: none;
+            border-top: none;
+            border-bottom: none;
+
+        }
+        
+        #northG,#westG,#eastG,#southG{
+            background-color: rgb(18, 231, 18);
+            opacity: 0.2;
+            
+            
+        }
+        #northR,#westR,#eastR,#southR{
+            background-color: rgb(206, 7, 7);
+            opacity: 0.2;
+            
+        }
+        #northY,#westY,#eastY,#southY{
+            background-color: rgb(240, 252, 70);
+            opacity: 0.2;
+           
+        }
+        .color{
+            background-color: rgb(59, 55, 55);
+            color: rgb(151, 150, 150);
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <table >
+        <tr>
+            <td rowspan="2" colspan="2" id="squre"></td>
+            <td colspan="3" class="color">N</td>
+            <td colspan="2" rowspan="2" id="squre"></td>
+        </tr>
+        <tr>
+            <td id="northG">G</td>
+            <td id="northR">R</td>
+            <td id="northY">Y</td>
+        </tr>
+        <tr>
+            <td rowspan="3" class="color">W</td>
+            <td id="westG">G</td>
+            <td rowspan="3" colspan="3" ></td>
+            <td id="eastG">G</td>
+            <td rowspan="3" class="color">E</td>
+        </tr>
+        <tr>
+            <td id="westR">R</td>
+            <td id="eastR">R</td>
+        </tr>
+        <tr>
+            <td id="westY">Y</td>
+            <td id="eastY">Y</td>
+        </tr>
+        <tr>
+            <td rowspan="2" colspan="2" id="squre"></td>
+            <td id="southG">G</td>
+            <td id="southR">R</td>
+            <td id="southY">Y</td>
+            <td rowspan="2" colspan="2" id="squre"></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="color">S</td>
+        </tr>
+    </table>
+    <script src="trafficSignalTable.js"></script>
+</body>
+</html>

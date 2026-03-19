@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation Checking</title>
+      <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+<style>
+    #cityTr{
+        align-items: end;
+    }
+    h1{
+        margin: 0 auto;
+        text-align: center;
+    }
+    span{
+        color: red;
+        font-size: 8px;
+    }
+  .input-error {
+    border: 1px solid red;
+}
+
+</style>
+<body>
+
+    <form id="jobApplication" action="/submit-form" method="post" target="_blank">
+        <h1> Job Application Form</h1>
+        <br><br>
+        
+<fieldset>
+            <table >
+            <legend>Basic Detail</legend>
+    <tr>
+            <td><label> First Name</label></td>
+             <td><input type="text" id="firstName" name="first"></td>
+             <td><span id="firstError"></span></td>
+             <td> <label>Last Name</label></td> 
+            <td><input type="text" id="lastName" name="lastName"></td><br><br>
+         <td><span id="lastnameError"></span></td>
+    </tr>
+         
+    
+       
+    <tr>
+       <td><label>Designation</label></td>
+        <td><input type="text" id="designation" name="designation"></td>
+        <td><span id="designationError"></span></td>
+        <td><label>Address 1</label></td>
+        <td><input type="text" id="address1" name="address1"></td>
+        <td><span id="address1Error"></span></td>
+
+    </tr>
+
+    <tr>
+        <td><label>Email</label></td>
+        
+        <td><input type="text" id="email" name="email"></td>
+        <td><span id="emailError"></span></td>
+        <td><label>Address 2</label></td>
+        <td><input type="text" id="address2" name="address2"></td>
+        <td><span id="address2Error"></span></td>
+    </tr>
+    <tr id="cityTr">
+         <td><label>City</label></td>
+        <td><input type="text" id="city" name="city"></td>
+        <td><span id="cityError"></span></td>
+    </tr>
+       <tr>
+        <td> <label>Phone Number</label></td>
+        <td><input type="text" id="phone" name="phone_number"></td>
+        <td><span id="phoneError"></span></td>
+       </tr>
+       <tr>
+        <td> <label>State</label></td>
+        <td> 
+        <select id="state" name="state" >
+            <option value="gujrat">Gujrat</option>
+            <option value="rajasthan">Rajasthan</option>
+            <option value="mharastra">Mharastra</option>
+        </select></td>
+        <td><span id="stateError"></span></td>
+       </tr>
+       
+     <tr>
+        <td><label>Gender   </label></td>
+        <td><span id="genderError"></span></td>
+        <td><label for="male"> Male</label>
+        <input type="radio" name="gender" id="male" ></td>
+            
+         <td> <label for="female">Female</label>
+      <input type="radio" name="gender" id="female" ></td>
+        
+        <td> <label>  Zip code</label></td>
+        <td><input type="text" id="zipCode" name="zipCode"></td>
+         <td><span id="zipcodeError"></span></td>
+        </tr>
+        
+    <tr>
+        <td> <label>Relationship Status</label></td>
+        <td>        <select id="relation" name="relation">
+            <option id="single">single</option>
+            <option id="married">married</option>
+            <option id="divorced">divorced</option>
+        </select></td>
+          <td><span id="relationError"></span></td>
+        <td> <label> Date Of Birth</label></td>
+        <td><input type="date" id="date" name="date"></td>
+          <td><span id="birthDateError"></span></td>
+    </tr>
+
+ </table>
+  </fieldset><br><br>
+
+  <fieldset>
+    <legend>Education Details</legend>
+    
+    <table id="education" border="1">
+        <span id="educationRowError"></span>
+        <label>Add Row</label>
+         <!-- <button type="button" onclick="education_details()"> + </button> -->
+        <button type="button" onclick="createTable()"> + </button>
+        <label>Delete Row</label>
+        <button type="button" onclick="deleteRow()">-</button>
+        <tr>
+            <td >No.</td>
+            <td>Course</td>
+            <td>Passing Year</td>
+            <td>Uni/Board</td>
+            <td>Result</td>
+        </tr>
+
+    </table>
+
+  </fieldset><br><br>
+
+  <fieldset>
+    <legend>Work Experience</legend>
+
+   <table id="workExperience" border="1px">
+    <span id="workExperienceError"></span>
+    <label> Add Row</label>
+     <!-- <button type="button" onclick="workExperience() "> + </button> -->
+    <button type="button" onclick="createWorkTable()">+</button>
+    <label>Delete Row</label>
+        <button type="button" onclick="deleteWorkRow()">-</button>
+        <tr>
+            <td>No.</td>
+            <td>Company name</td>
+            <td>From</td>
+            <td>To</td>
+            <td>Annual Package</td>
+            <td>Reason to leave</td>
+            <td>Contact NO.</td>
+            <td>ref Ct. Name</td>
+        </tr>
+
+    </table>
+  </fieldset><br><br>
+
+  <fieldset>
+    <legend>Language Known</legend>
+    <table id="languageTable" onload="language()">
+    </table>
+    <span id="languageError"></span>
+  </fieldset><br><br>
+
+  <fieldset>
+
+    <legend>Technologies You Know</legend>
+    
+    <table id="technologiesTable"></table>
+    
+    <span id="TechnologyError"></span>
+    
+    </fieldset>
+
+  <fieldset>
+    <legend>Referance Contact</legend>
+    <table>
+        <tr>
+            <td>  <label for="name">Name</label></td>
+            <td> <input type="text" id="refrenceName" name="refrenceName"></td>
+            <td><span id="refrenceNameError"></span></td>
+            <td> <label for="contactNo">Contact Number</label></td>
+            <td><input type="text" id="refrenceCon" name="refrenceCon"></td>
+             <td><span id="refrenceContactError"></span></td>
+            <td><label for="contactNo">Relation</label></td>
+            <td>  <input type="text" id="refrenceRel" name="refrenceRel"></td>
+             <td><span id="refrenceRelError"></span></td>
+         </tr>
+         <tr>
+            <td>  <label for="name">Name</label></td>
+            <td> <input type="text" id="refrenceName" name="refrenceName"></td>
+             <td><span id="refrenceNameError"></span></td>
+            <td> <label for="contactNo">Contact Number</label></td>
+            <td><input type="text" id="refrenceCon" name="refrenceCon"></td>
+             <td><span id="refrenceContactError"></span></td>
+            <td><label for="relation">Relation</label></td>
+            <td>  <input type="text" id="refrenceRel" name="refrenceRel"></td>
+             <td><span id="refrenceRelError"></span></td>
+        </tr>
+    </table>
+  </fieldset><br><br>
+
+  <fieldset>
+    <legend> Preferances</legend>
+    <table>
+      <tr>
+        <td>Preferd location</td>
+        <td> <select id="preferances" multiple >
+            <option value="ahemdabad">Ahemdabad</option>
+            <option value="gandhinagar">Gandhinagar</option>
+            <option value="anand">Anand</option>
+            <option value="surat">Surat</option>
+            <option value="bhavnagar">Bhavnagar</option>
+        </select>
+        </td>
+        <td><span id="preferancesError"></span></td>
+        <td>   <table>
+                  <tr>  <td>Notice Period</td>
+                <td><input type="text" id="noticPeriod"></td>
+                <td><span id="noticPeriodError"></span></td>
+            </tr>
+                  <tr>  <td>Expected CTC </td>
+                <td><input type="text" id="expectedCtc"> </td>
+             <td><span id="expectedCTCError"></span></td></tr>
+                  <tr>  <td>Current CTC</td>
+                  <td><input type="currentCtc" id="currentCtc"></td>
+                 <td><span id="currentCtcError"></span></td></tr>
+              </table>
+        </td>
+        <td> <label for="department">Department</label></td>
+        <td><select id="department">
+            <option value="devlopment">Devlopment</option>
+            <option id="design">Design</option>
+            <option id="marketing">Maeketing</option>
+            </select>
+        </td>
+        <td><span id="departmentError"></span></td>
+    </tr>
+
+    </table>
+  </fieldset><br><br>
+
+<table>
+
+    <tr>
+        <td><input type="submit" id="submit" name="reset" value="Submit"></td>
+        <td><input type="reset" id="reset" name="reset"></td>
+    </tr>
+</table>
+
+
+    </form>
+
+    <script src="formValidationCheck.js"></script>
+</body>
+</html>
+
+

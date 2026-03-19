@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cube Game</title>
+    <style>
+
+ #game {
+  display: flex;
+  justify-content: center; /* Centers content horizontally */
+  align-items: center;     /* Centers content vertically */
+  height: 75vh;  
+  flex-wrap: wrap; 
+       /* Sets the container height to the full viewport height */
+  }
+  table{
+    height: 60vmin;
+    width:60vmin;
+    table-layout: fixed;
+    margin: 30px auto;
+  }
+  body{
+    background-color: rgb(245, 155, 155);
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+
+    /* overflow: hidden; */
+  }
+   
+  h1{
+  text-align: center;
+  display: flex;
+  justify-content: center; 
+   
+  }
+
+  #start-btn{
+    display: block;
+    margin: 200px auto;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+#time{
+    text-align: center;
+    background-color: rgb(221, 223, 238);
+    padding: 10px;
+    border-radius: 10px;
+}
+ #timer{
+     text-align: end;
+     color: white;
+     
+}
+#scoreShow{
+    text-align: left;
+    font-size: 16px;
+    color: bisque;
+    
+}
+#pause-btn{
+    background-color: rgb(243, 161, 7);
+  border: none;
+  color: white; 
+  padding: 10px 12px; 
+  text-align: center; 
+  text-decoration: none; 
+  font-size: 16px; 
+  cursor: pointer; 
+ 
+}
+#resume-btn{
+      background-color: green;
+  border: none;
+  color: white; 
+  padding: 10px 12px; 
+  text-align: center; 
+  text-decoration: none; 
+  font-size: 16px; 
+  cursor: pointer; 
+
+}
+
+#items{
+display: flex;
+justify-content:space-between;
+
+
+}
+
+
+</style>
+</head>
+<body class="bodyClass">
+    <h1>Table Game</h1>
+    <button id="start-btn" onclick="startGame()">Start Game</button>
+
+
+    <div id="items">
+    <h3 id="scoreShow"> Score : <span id="score"> </span></h3>
+
+    <h3 id="time">  <span id="timer"></span></h3>
+    <div>
+    <button type="button" id="pause-btn" onclick=pauseTimer()>PAUSE</button>
+    <button id="resume-btn" onclick=resumetimer() >Resume</button>
+    </div>
+    </div>
+
+    <div id="game"></div>
+
+      <script src="cubeGame.js"></script>
+    
+</body>
+</html>

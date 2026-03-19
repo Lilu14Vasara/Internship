@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Field</title>
+</head>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+form {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+
+fieldset {
+    border: 1px solid #dcdde1;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 10px;
+    color: #2980b9;
+    font-size: 1.1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 8px 5px;
+    vertical-align: middle;
+}
+
+/* Input Styling */
+input[type="text"],
+input[type="date"],
+input[type="currentCtc"], 
+select {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+
+#education, #workExperience {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#education td, #workExperience td {
+    border: 1px solid #eee;
+    padding: 10px;
+}
+
+#education tr:first-child, 
+#workExperience tr:first-child {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+input[type="submit"], 
+input[type="reset"] {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+input[type="submit"] {
+    background-color: #27ae60;
+    color: white;
+}
+
+input[type="submit"]:hover {
+    background-color: #219150;
+}
+
+input[type="reset"] {
+    background-color: #e74c3c;
+    color: white;
+    margin-left: 10px;
+}
+
+input[type="reset"]:hover {
+    background-color: #c0392b;
+}
+
+
+#cityTrr {
+    height: 50px;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+h3{
+  text-align: center;
+}
+</style>
+<body >
+  <!-- <body style="pointer-events: none;">-->
+    <h3> Only Fill the details you want to Update</h3>
+   <form action="/updateBasic/<%= basic.applicant_id %>" method="post">
+    <!-- Add disabled  to Radonly form -->
+<fieldset>
+ <table >
+            <legend>Basic Detail</legend>
+    <tr>
+            <td><label> First Name</label></td>
+             <td><input type="text" id="firstName" name="first" value="<%= basic.first_name %>"></td>
+             <td><span id="firstError"></span></td>
+             <td> <label>Last Name</label></td> 
+            <td><input type="text" id="lastName" name="lastName" value="<%= basic.last_name %>"></td><br><br>
+         <td><span id="lastnameError"></span></td>
+    </tr>
+         
+    
+       
+    <tr>
+       <td><label>Designation</label></td>
+        <td><input type="text" id="designation" name="designation" value="<%= basic.designation %>"></td>
+        <td><span id="designationError"></span></td>
+        <td><label>Address 1</label></td>
+        <td><input type="text" id="address1" name="address1" value="<%= basic.address1 %>"></td>
+        <td><span id="address1Error"></span></td>
+
+    </tr>
+
+    <tr>
+        <td><label>Email</label></td>
+        
+        <td><input type="text" id="email" name="email" value="<%= basic.email %>"></td>
+        <td><span id="emailError"></span></td>
+        <td><label>Address 2</label></td>
+        <td><input type="text" id="address2" name="address2" value="<%= basic.address2 %>"></td>
+        <td><span id="address2Error"></span></td>
+    </tr>
+    <tr id="cityTr">
+         <td><label>City</label></td>
+        <td><input type="text" id="city" name="city" value="<%= basic.city %>"></td>
+        <td><span id="cityError"></span></td>
+    </tr>
+       <tr>
+        <td> <label>Phone Number</label></td>
+        <td><input type="text" id="phone" name="phone_number" value="<%= basic.phone_number %>"></td>
+        <td><span id="phoneError"></span></td>
+       </tr>
+       <tr>
+        <td> <label>State</label></td>
+        <td> 
+        <select id="state" name="state" >
+            <option value="gujrat" <%= basic.state==="gujrat"?'selected':'' %>>Gujrat</option>
+            <option value="rajasthan" <%= basic.state==="rajasthan"?'selected':'' %>>Rajasthan</option>
+            <option value="mharastra" <%= basic.state==="mharastra"?'selected':'' %>>Mharastra</option>
+        </select></td>
+        <td><span id="stateError"></span></td>
+       </tr>
+       
+     <tr>
+        <td><label>Gender   </label></td>
+        <td><span id="genderError"></span></td>
+        <td><label for="male"> Male</label>
+        <input type="radio" name="gender" id="male" value="Male" <%= basic.gender==="Male"?'checked':'' %> ></td>
+            
+         <td> <label for="female">Female</label>
+      <input type="radio" name="gender" id="female" value="female" <%= basic.gender==="female"?'checked':'' %>></td>
+        
+        <td> <label>  Zip code</label></td>
+        <td><input type="text" id="zipCode" name="zipCode" value="<%= basic.zip_code %>"></td>
+         <td><span id="zipcodeError"></span></td>
+        </tr>
+        
+    <tr>
+        <td> <label>Relationship Status</label></td>
+        <td>        <select id="relation" name="relation">
+            <option id="single" <%= basic.relation==="single"?'selected':'' %>>single</option>
+            <option id="married" <%= basic.relation==="married"?'selected':'' %>>married</option>
+            <option id="divorced" <%= basic.relation==="divorced"?'selected':'' %>>divorced</option>
+        </select></td>
+          <td><span id="relationError"></span></td>
+        <td> <label> Date Of Birth</label></td>
+        <td><input type="date" id="date" name="date" value="<%= basic.birth_date.toISOString().split('T')[0] %>"></td>
+          <td><span id="birthDateError"></span></td>
+    </tr>
+ </table>
+ 
+  </fieldset><br><br>
+  <fieldset>
+    <legend>Education Details</legend>
+    
+    <table id="education" border="1">
+        <span id="educationRowError"></span>
+        <label>Add Row</label>
+         <button type="button" onclick="education_details()"> + </button>
+        <label>Delete Row</label>
+        <button type="button" onclick="deleteRow()" >-</button>
+        <tr>
+            <td >No.</td>
+            <td>Course</td>
+            <td>Passing Year</td>
+            <td>Uni/Board</td>
+            <td>Result</td>
+        </tr>
+      
+             <% education.forEach((element,i) => { %>
+             <tr>
+          <td><%= i+1 %></td>  
+            <td>  <select id="course" name="course[]"  >
+               <option value="10" <%= element.course_name=="10"?"selected":"" %>>10th</option>
+               <option value="12" <%= element.course_name=="12"?"selected":"" %>>12th</option>
+               <option value="BE" <%= element.course_name=="BE"?"selected":"" %>>BE</option>
+               <option value="MCA" <%= element.course_name=="MCA"?"selected":"" %>>MCA</option>
+               <option value="BCA" <%= element.course_name=="BCA"?"selected":"" %>>BCA</option>
+               <option value="BSc" <%= element.course_name=="BSc"?"selected":"" %>>BSc</option>
+               </select></td>
+        <td><input type="text" name="passingYear[]" value="<%= element.passing_year %>" ></td>
+        <td><input type="text" name="board[]" value="<%= element.uni_board %>"></td>
+        <td><input type="text" name="percentage[]" value="<%= element.result %>"></td>
+    
+          </tr>
+          <% }) %>
+      
+
+    </table>
+  </fieldset><br><br>
+    <fieldset>
+    <legend>Work Experience</legend>
+
+   <table id="workExperience" border="1px">
+    <span id="workExperienceError"></span>
+    <label> Add Row</label>
+     <button type="button" onclick="workExperience() "> + </button>
+    
+    <label>Delete Row</label>
+        <button type="button" onclick="deleteWorkRow()">-</button>
+        <tr>
+            <td>No.</td>
+            <td>Company name</td>
+            <td>From</td>
+            <td>To</td>
+            <td>Annual Package</td>
+            <td>Reason to leave</td>
+            <td>Contact NO.</td>
+            <td>ref Ct. Name</td>
+        </tr>
+        <% work.forEach((element,i) => { %>
+
+                <tr>
+                <td><%= i+1 %></td>  
+              <td><input type="text" name="companyName[]" value="<%= element.company_name %>"></td>
+             <td><input type="date" name="fromDate[]" value="<%= element.from_date.toISOString().split('T')[0] %>"></td>
+             <td><input type="date" name="toDate[]" value="<%= element.to_date.toISOString().split('T')[0] %>"></td>
+             <td><input type="number" name="annualPackage[]" value="<%= element.annual_Package %>"></td>
+             <td><input type="text" name="reasonTolive[]" value="<%= element.reason_live %>"></td>
+             <td><input type="number" name="contactNo[]" value="<%= element.contact_number %>"></td>
+             <td><input type="text" name="refCtName[]" value="<%= element.ref_ct_Name %>"></td>
+            </tr>
+             
+            <% }) %>
+
+    </table>
+  </fieldset><br><br>
+    <fieldset>
+    <legend>Language Known</legend>
+    <table id="languageTable" onload="language()">
+    </table>
+    <span id="languageError"></span>
+  </fieldset><br><br>
+   <fieldset>
+
+    <legend>Technologies You Know</legend>
+    
+    <table id="technologiesTable"></table>
+    
+    <span id="TechnologyError"></span>
+    
+    </fieldset>
+
+    <fieldset>
+    <legend>Referance Contact</legend>
+    <table>
+        <tr>
+            <td>  <label for="name">Name</label></td>
+            <td> <input type="text" id="refrenceName" name="refrenceName" value="<%= refrence[0].refrence_name %>"></td>
+            <td><span id="refrenceNameError"></span></td>
+            <td> <label for="contactNo">Contact Number</label></td>
+            <td><input type="text" id="refrenceCon" name="refrenceCon" value="<%= refrence[0].contact_number %>"></td>
+             <td><span id="refrenceContactError"></span></td>
+            <td><label for="contactNo">Relation</label></td>
+            <td>  <input type="text" id="refrenceRel" name="refrenceRel" value="<%= refrence[0].relation %>"></td>
+             <td><span id="refrenceRelError"></span></td>
+         </tr>
+        
+    </table>
+  </fieldset><br><br>
+
+  <fieldset>
+    <legend> Preferances</legend>
+    <table>
+      <tr>
+        <td>Preferd location</td>
+        <% preferance.forEach(element => { %>
+          <td> <select id="preferances" name="location" multiple >
+            <option value="ahemdabad" <%= element.preference_location.includes("ahemdabad")?'selected':'' %>>Ahemdabad</option>
+            <option value="gandhinagar" <%= element.preference_location.includes("gandhinagar")?'selected':'' %>>Gandhinagar</option>
+            <option value="anand" <%= element.preference_location.includes("anand")?'selected':'' %>>Anand</option>
+            <option value="surat" <%= element.preference_location.includes("surat")?'selected':'' %>>Surat</option>
+            <option value="bhavnagar" <%= element.preference_location.includes("bhavnagar")?'selected':'' %>>Bhavnagar</option>
+        </select>
+        </td>
+       <% });%>
+        
+        <td><span id="preferancesError"></span></td>
+        <td>   <table>
+                  <tr>  <td>Notice Period</td>
+                <td><input type="text" id="noticPeriod" name="noticePeriod" value="<%= preferance[0].notice_period %>"></td>
+                <td><span id="noticPeriodError"></span></td>
+            </tr>
+                  <tr>  <td>Expected CTC </td>
+                <td><input type="text" id="expectedCtc" name="expectedCtc" value="<%= preferance[0].expected_ctc %>"> </td>
+             <td><span id="expectedCTCError"></span></td></tr>
+                  <tr>  <td>Current CTC</td>
+                  <td><input type="currentCtc" id="currentCtc" name="currentCtc" value="<%= preferance[0].current_ctc %>"></td>
+                 <td><span id="currentCtcError"></span></td></tr>
+              </table>
+        </td>
+        <td> <label for="department">Department</label></td>
+        <td><select id="department" name="department">
+            <option value="devlopment" <%= preferance[0]?.department==="devlopment"?'selected':'' %>>Devlopment</option>
+            <option value="design" <%= preferance[0]?.department==="design"?'selected':'' %>>Design</option>
+            <option value="marketing" <%= preferance[0]?.department==="marketing"?'selected':'' %>>Maeketing</option>
+            </select>
+        </td>
+        <td><span id="departmentError"></span></td>
+    </tr>
+
+    </table>
+  </fieldset><br><br>
+  <button type="submit">Submit</button>
+   </form>
+  <script>
+
+    function education_details() {
+    let container = document.getElementById('education');
+    let newRow = `<tr>
+        <td><input type="text"></td>  
+       <td> <select id="course" name="course[]"  >
+            <option value="10">10th</option>
+            <option value="12">12th</option>
+            <option value="BE">BE</option>
+            <option value="MCA">MCA</option>
+            <option value="BCA">BCA</option>
+            <option value="BSc">BSc</option>
+        </select></td>
+        <td><input type="text" name="passingYear[]"></td>
+        <td><input type="text" name="board[]"></td>
+        <td><input type="text" name="percentage[]"></td>
+    </tr>`;
+    container.insertAdjacentHTML('beforeend', newRow);
+}
+
+function workExperience() {
+    let container = document.getElementById('workExperience');
+    let newRow = `<tr>
+        <td><input type="number"></td>  
+        <td><input type="text" name="companyName[]"></td>
+        <td><input type="date" name="fromDate[]"></td>
+        <td><input type="date" name="toDate[]"></td>
+        <td><input type="number" name="annualPackage[]"></td>
+        <td><input type="text" name="reasonTolive[]"></td>
+        <td><input type="number" name="contactNo[]"></td>
+        <td><input type="text" name="refCtName[]"></td>
+    </tr>`;
+    container.insertAdjacentHTML('beforeend', newRow);
+}
+
+
+  function deleteRow() {
+      let container=document.getElementById('education');
+      if (!container) return;
+      let rowCount = container.rows.length;
+      console.log(rowCount);
+      
+      if (rowCount > 0) {
+          container.deleteRow(rowCount - 1);
+      }
+  }
+  
+
+  
+  function deleteWorkRow(){
+      let container=document.getElementById('workExperience');
+      if (!container) return;
+      let rowCount = container.rows.length;
+      console.log(rowCount);
+      
+      if (rowCount > 0) {
+          container.deleteRow(rowCount - 1);
+      }
+  }
+    function language() {
+      let table=document.getElementById('languageTable')
+      let languageArr=["Hindi","English","Gujrati"];
+      let skillArr=["Read","Write","Speak"];
+
+      table.innerHTML="";
+   for (let i = 0; i < languageArr.length; i++) {
+     let lang=languageArr[i]
+     let row=document.createElement('tr');
+     let userLang=(userLanguage || []).find(t=>t.language_name=== lang);
+     let td=document.createElement('td');
+    
+  td.innerHTML =`${lang}`
+   td.innerHTML +=`<input type="checkbox" name='${languageArr[i]}' ${userLang ? "checked":""}>`;
+     row.appendChild(td);
+  
+     for (let j = 0; j < skillArr.length; j++) {
+
+        let skill=skillArr[j];
+      let checked='';
+       if(userLang&& skill=="Read" && userLang.can_read) checked="checked";
+      if(userLang&& skill=="Write" && userLang.can_write) checked="checked";
+      if(userLang&& skill=="Speak" && userLang.can_speak) checked="checked";
+
+      let td=document.createElement('td');
+      td.innerHTML=`<label> ${skillArr[j]} </label>
+      <input type="checkbox" name='${languageArr[i]}_${skillArr[j]}' ${checked}>`
+  
+      row.appendChild(td)
+  
+     }
+     table.appendChild(row)
+      
+   }   
+  }
+  const userLanguage = <%- JSON.stringify(languages) %>
+  language();
+  
+  function technology(){
+      let table= document.getElementById('technologiesTable');
+      let techArr=["PHP","Mysql","larave","Oracle"];
+      let levelArr=["Beginer","Mideator","Expert"];
+      
+      table.innerHTML="";
+       for (let i = 0; i < techArr.length; i++) {
+      let tech=techArr[i];
+     let row=document.createElement('tr');
+     let userTech=(userTechnology || []).find(t=>t.technology_name=== tech);
+     let td=document.createElement('td');
+     td.innerHTML=`${tech}`;
+    
+     td.innerHTML =techArr[i];
+     td.innerHTML += `<input type="checkbox" name="tech_check" value="${techArr[i]}" ${userTech ?"checked":""}>`;
+     row.appendChild(td);
+  
+     for (let j = 0; j < levelArr.length; j++) {
+      let level=levelArr[j];
+      let checked='';
+      if(userTech && level=="Beginer" && userTech.is_beginer) checked="checked";
+      if( userTech && level=="Mideator" && userTech.is_mideator) checked="checked";
+      if(userTech && level=="Expert" && userTech.is_expert) checked="checked";
+      let td=document.createElement('td');
+      td.innerHTML=`<label> ${levelArr[j]} </label>
+      <input type="radio" name='${techArr[i]}' value='${levelArr[j]}' class='toggle-radio' ${checked}>`
+  
+      row.appendChild(td)
+  
+     }
+     table.appendChild(row)
+  
+  }
+  }
+   const userTechnology = <%- JSON.stringify(technology) %>
+  technology();
+  document.addEventListener("mousedown",(e)=>{
+    if (e.target.classList.contains("toggle-radio")) {
+        e.target.wasChecked=e.target.checked;
+    }
+  });
+  document.addEventListener("click",(e)=>{
+    if (e.target.classList.contains('toggle-radio')) {
+        if (e.target.wasChecked) {
+            e.target.checked=false
+        }
+        else{
+            e.target.wasChecked=true
+        }
+    }
+  });
+
+ 
+  </script>
+</body>
+</html>

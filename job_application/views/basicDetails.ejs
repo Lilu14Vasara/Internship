@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic details</title>
+</head>
+<style>
+                    body { font-family: sans-serif; margin: 20px; }
+        h2 { background: #f4f4f4; padding: 10px; border-left: 5px solid #333; text-align: center;}
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        button{
+    background:white;
+    color:#1a73e8;
+    border:1px solid #1a73e8;
+    border-radius:4px;
+    padding:2px 6px;
+    font-size:11px;
+    margin-right:5px;
+}
+   div table{
+    width:100%;
+    max-width:1100px;
+    background:rgb(78, 78, 78);
+    border-radius:10px;
+    overflow:hidden;
+    border-collapse:collapse;
+    box-shadow:0 6px 20px rgba(0,0,0,0.12);
+}
+.button{
+    cursor: pointer;
+}
+#button{
+    cursor: pointer;
+}
+span{
+    cursor: pointer;
+}
+</style>
+<body>
+
+    <h4 id="page"></h4>
+    <div id="search">
+    <input type="text" id="searchInput" value="<%= search %>" placeholder="Search By Name">
+    <input type="button" onclick="searchStudent()" value="submit">
+    </div>
+
+     <h3>Basic Details : <Data></Data></h3>
+        <table border="1">
+            <tr>
+               <th>Applicant_id <span class="sort" onclick="sortData('applicant_id','ASC')">▲</span>
+             <span class="sort" onclick="sortData('applicant_id','DESC')">▼</span></th>
+                <th>Full Name  <span class="sort" onclick="sortData('first_name','ASC')">▲</span>
+                <span class="sort" onclick="sortData('first_name','DESC')">▼</span></th>
+                
+                <th>designation</th>
+                <th>address1</th>
+                <th>Email</th>
+                <th>city</th>
+                <th>Phone</th>
+                <th>State</th>
+                <th>Gender</th>
+                <th>Zip Code</th>
+                <th>Relationship status</th>
+                <th>Birth Date</th>
+                <th colspan="3" style="text-align: center;">Action</th>
+            </tr>
+            <% basic.forEach(element => { %>
+              <tr>
+                <td><%= element.applicant_id  %></td>
+                <td><%= element.first_name %> <%= element.last_name %></td>
+                <td><%= element.designation%></td>
+                <td><%= element.address1 %></td>
+                <td><%= element.email %></td>
+                <td><%= element.city %></td>
+                <td><%= element.phone_number %></td>
+                <td><%= element.state %></td>
+                <td><%= element.gender %></td>
+                <td><%= element.zip_code %></td>
+                <td><%= element.relationsjip_status %></td>
+                <td><%= new Date(element.birth_date).toLocaleDateString() %></td>
+                <td onclick="getDetails('<%= element.applicant_id %>')" style="cursor: pointer;">Details</td>
+                <td><a href="/deleteBasic/<%= element.applicant_id %>"><button onclick="confirm('Are you sure want to Delete?')">Delete</button></a></td>
+                <td><a href="/edit/<%= element.applicant_id %>"><button>Update</button></a></td>
+                
+            </tr>
+            <% }) %>
+           
+        </table><br><br>
+        <div id="pagination">
+
+    <% if (currentPage > 1) { %>
+     <button onclick="changePage(<%= currentPage-1 %>)" class="button">Previous</button>
+    <% } %>
+    
+    <% let start=Math.max(1,currentPage-2);%>
+    <% let end=Math.min(totalPages,currentPage+2);%>
+
+    <%for (let i = start; i <= end; i++) {%>
+     
+        <button class="<% i===currentPage ? 'active':"" %>" onclick="changePage(<%= i %>)" id="button"><%= i %></button>
+        
+    <% } %>
+
+    <% if (currentPage < totalPages) { %>
+     <button onclick="changePage(<%= currentPage+1 %>)" class="button">Next</button>
+    <% } %>
+     <button onclick="changePage(<%= totalPages %>)" class="button">Last Page</button> 
+   
+</div>
+</body>
+  <script>
+    let currentSort="<% sort %>";
+    let currentOrder="<% order%>";
+     let searchValue="<% search %>";
+  
+    document.getElementById('page').innerHTML= `Current Page is : <%= currentPage %>`;
+
+    function changePage(page) {
+    window.location.href = `/display/all/?page=${page}&sort=${currentSort}&order=${currentOrder}&search=${searchValue}`;
+} 
+
+function sortData(field, order) {
+    currentSort = field;
+    currentOrder = order;
+    window.location.href = `/display/all/?page=1&sort=${field}&order=${order}&search=${searchValue}`;
+}
+function searchStudent() {
+    let name = document.getElementById("searchInput").value;
+    window.location.href = `/display/all/?page=1&search=${name}&sort=${currentSort}&order=${currentOrder}&search=${searchValue}`;
+}
+
+
+async function getDetails(id) {
+        try {
+            const response = await fetch(`/display/${id}`, { method: 'GET' },{headers:{'Content-type':'application/json'}});
+            if (response.ok) {  
+                window.location.href =`/display/${id}`
+            }
+            else{
+                alert(message)
+            }
+        } catch (err) { console.error(err); }       
+ }
+    
+
+    </script>
+</html>

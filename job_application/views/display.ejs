@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Details</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        h2 { background: #f4f4f4; padding: 10px; border-left: 5px solid #333; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1>Full Application Profile</h1>
+
+    <h2>Basic Details</h2>
+    <table>
+        <tr><th>First Name</th><td><%= basic.first_name %></td><th>Last Name</th><td><%= basic.last_name %></td></tr>
+        <tr><th>Designation</th><td><%= basic.designation %></td><th>Email</th><td><%= basic.email %></td></tr>
+        <tr><th>Phone</th><td><%= basic.phone_number %></td><th>City</th><td><%= basic.city %></td></tr>
+        <tr><th>Gender</th><td><%= basic.gender %></td><th>Birth Date</th><td><%= new Date(basic.birth_date).toLocaleDateString() %></td></tr>
+    </table>
+
+    <h2>Education Details</h2>
+    <table>
+        <tr><th>Course</th><th>Passing Year</th><th>Uni/Board</th><th>Result (%)</th></tr>
+        <% education.forEach(edu => { %>
+            <tr>
+                <td><%= edu.course_name %></td>
+                <td><%= edu.passing_year %></td>
+                <td><%= edu.uni_board %></td>
+                <td><%= edu.result %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <h2>Work Experience</h2>
+    <table>
+        <tr><th>Company</th><th>From</th><th>To</th><th>Package</th><th>Reason</th></tr>
+        <% work.forEach(w => { %>
+            <tr>
+                <td><%= w.company_name %></td>
+                <td><%= new Date(w.from_date).toLocaleDateString() %></td>
+                <td><%= new Date(w.to_date).toLocaleDateString() %></td>
+                <td><%= w.annual_Package %></td>
+                <td><%= w.reason_live %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <h2>Languages Known</h2>
+    <table>
+        <tr><th>Language</th><th>Read</th><th>Write</th><th>Speak</th></tr>
+        <% languages.forEach(lang => { %>
+            <tr>
+                <td><%= lang.language_name %></td>
+                <td><%= lang.can_read ? 'Yes' : 'No' %></td>
+                <td><%= lang.can_write ? 'Yes' : 'No' %></td>
+                <td><%= lang.can_speak ? 'Yes' : 'No' %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <h2>Technologies Known</h2>
+    <table>
+        <tr><th>Technology</th><th>Level</th></tr>
+        <% technology.forEach(tech => { %>
+            <tr>
+                <td><%= tech.technology_name %></td>
+                <td>
+                    <%= tech.is_beginer ? 'Beginner' : '' %>
+                    <%= tech.is_mideator ? 'Mediator' : '' %>
+                    <%= tech.is_expert ? 'Expert' : '' %>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <h2>References</h2>
+    <table>
+        <tr><th>Name</th><th>Contact</th><th>Relation</th></tr>
+        <% refrence.forEach(ref => { %>
+            <tr>
+                <td><%= ref.refrence_name %></td>
+                <td><%= ref.contact_number %></td>
+                <td><%= ref.relation %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <h2>Preferences</h2>
+    <% if(preferance.length > 0) { %>
+        <table>
+            <tr><th>Location</th><th>Notice Period</th><th>Expected CTC</th><th>Current CTC</th><th>Department</th></tr>
+            <tr>
+                <td><%= preferance[0].preference_location %></td>
+                <td><%= preferance[0].notice_period %></td>
+                <td><%= preferance[0].expected_ctc %></td>
+                <td><%= preferance[0].current_ctc %></td>
+                <td><%= preferance[0].department %></td>
+            </tr>
+        </table>
+    <% } %>
+
+    <br>
+    <!-- <a href="/">Submit Another Application</a> -->
+
+</body>
+</html>

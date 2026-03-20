@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student data Pagination</title>
+</head>
+<style>
+    body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background-color: white;
+    margin:0;
+    padding:30px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+    h3{
+        text-align: center;
+        color: rgb(34, 32, 32);
+    }
+   div table{
+    width:100%;
+    max-width:1100px;
+    background:rgb(78, 78, 78);
+    border-radius:10px;
+    overflow:hidden;
+    border-collapse:collapse;
+    box-shadow:0 6px 20px rgba(0,0,0,0.12);
+}
+th{
+    background:#1a73e8;
+    color:white;
+    padding:14px;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+}
+td{
+    padding:12px 14px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+    font-size:14px;
+    color:#f5fbff;
+}
+button{
+    background:white;
+    color:#1a73e8;
+    border:1px solid #1a73e8;
+    border-radius:4px;
+    padding:2px 6px;
+    font-size:11px;
+    margin-right:5px;
+}
+#button{
+    margin: 30px;
+    margin-bottom: 20px;
+   box-shadow:0 15px 30px rgba(0,0,0,0.12);
+}
+
+
+    #search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 20px 0;
+        margin-bottom: 20px;
+    }
+
+    #search input[type="text"] {
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #333;
+        transition: border-color 0.3s ease;
+    }
+
+    #search input[type="text"]:focus {
+        border-color: #1a73e8;
+        outline: none;
+    }
+
+    #search input[type="button"] {
+        padding: 10px 20px;
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #search input[type="button"]:hover {
+        background-color: #165ab5;
+    }
+
+    #search input[type="button"]:active {
+        background-color: #0f478f;
+    }
+
+   
+    #search input[type="text"]::placeholder {
+        color: #888;
+        font-style: italic;
+    }
+   
+    .sort {
+        cursor: pointer;
+        margin-left: 8px;
+        font-size: 12px;
+        color: #fff;
+        transition: color 0.3s ease;
+    }
+
+    .sort:hover {
+        color: #f1f1f1;
+    }
+  
+    tr:hover {
+        background-color: rgba(26, 115, 232, 0.1);
+    }
+button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+  font-weight: bold;
+}
+ 
+</style>
+<body>
+    
+    <h3> Student Records</h3>
+    <h4 id="page"></h4>
+    <div id="search">
+    <input type="text" id="searchInput" value="<%= search %>" placeholder="Search By Name">
+    <input type="button" onclick="searchStudent()" value="submit">
+    </div>
+
+
+    
+ <div>
+    <table>
+        <tr>
+        <th>Student No<span class="sort" onclick="sortData('student_id','ASC')">▲</span>
+          <span class="sort" onclick="sortData('student_id','DESC')">▼</span></th>
+         <th> First Name
+            <span class="sort" onclick="sortData('first_name','ASC')">▲</span>
+          <span class="sort" onclick="sortData('first_name','DESC')">▼</span>
+         </th>
+         <th>Last Name</th>
+          <th>Email</th>
+          <th>Contact Number</th>
+          <th>Birth Date
+            <span class="sort" onclick="sortData('birth_date','ASC')">▲</span>
+          <span class="sort" onclick="sortData('birth_date','DESC')">▼</span>
+          </th>
+          <th>Gender 
+            <span class="sort" onclick="sortData('gender','ASC')">▲</span>
+          <span class="sort" onclick="sortData('gender','DESC')">▼</span>
+          </th>
+          <th>City
+            <span class="sort" onclick="sortData('city','ASC')">▲</span>
+          <span class="sort" onclick="sortData('city','DESC')">▼</span>
+          </th>
+          <th>Address</th>
+        </tr>
+        <% student.forEach(user => { %>
+        <tr>
+    
+            <td><%= user.student_id %></td>
+            <td><p><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%=user.email %></td>
+            <td><%=user.contact_number %></td>
+           <td><%= new Date(user.birth_date).toLocaleDateString('en-GB').replace(/\//g, '-') %></td>
+            <td><%=user.gender %></td>
+            <td><%=user.city %></td>
+            <td><%=user.address %></td>                   
+        </tr>
+         <%  }) %>
+    </table>
+</div>
+
+<div id="pagination">
+
+    <% if (currentPage > 1) { %>
+     <button onclick="changePage(<%= currentPage-1 %>)">Previous</button>
+    <% } %>
+    
+    <% let start=Math.max(1,currentPage-2);%>
+    <% let end=Math.min(totalPages,currentPage+2);%>
+
+    <%for (let i = start; i <= end; i++) {%>
+     
+        <button class="<% i===currentPage ? 'active':"" %>" onclick="changePage(<%= i %>)"><%= i %></button>
+        
+    <% } %>
+
+    <% if (currentPage < totalPages) { %>
+     <button onclick="changePage(<%= currentPage+1 %>)">Next</button>
+    <% } %>
+     <button onclick="changePage(<%= totalPages %>)">Last Page</button> 
+   
+</div>
+<script>
+ 
+    let currentSort="<% sort %>";
+    let currentOrder="<% order%>";
+    let searchValue="<% search %>";
+    document.getElementById('page').innerHTML= `Current Page is : <%= currentPage %>`;
+
+    function changePage(page) {
+    window.location.href = `/?page=${page}&sort=${currentSort}&order=${currentOrder}&search=${searchValue}`;
+} 
+
+function sortData(field, order) {
+    currentSort = field;
+    currentOrder = order;
+    window.location.href = `/?page=1&sort=${field}&order=${order}&search=${searchValue}`;
+}
+
+function searchStudent() {
+    let name = document.getElementById("searchInput").value;
+    window.location.href = `/?page=1&search=${name}&sort=${currentSort}&order=${currentOrder}`;
+}
+    
+
+</script>
+</body>
+</html> 

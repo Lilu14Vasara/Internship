@@ -25,6 +25,7 @@ app.get("/",(req,res)=>{
         let sort=req.query.sort||'student_id';
         let order=req.query.order||'ASC';
         let search=req.query.search||"";
+        let operators=req.query.oprator||'AND'
      
         currentPage = Math.min(currentPage, totalPages);
 
@@ -32,7 +33,7 @@ app.get("/",(req,res)=>{
                
 let regularExpression=/([$\^\-\[\]])([^\$\^\-\[\]]+)/g;
 const match=[...search.matchAll(regularExpression)];//first in symbol,second in value
-console.log(match);
+
 
 let condition=[];
 let params=[];
@@ -62,31 +63,51 @@ if(match.length>0)
         condition.push("city LIKE ?");
         params.push(`%${value}%`)
     }
-    console.log(symbol);;
+    console.log(symbol);
     console.log(value);
+ 
+    
     
     }
-    let sql=`SELECT * From student where ${condition.join(" AND ")}  order by ${sort} ${order} LIMIT ? OFFSET ?`;
-    let finalParams=[...params,pageSize,offset]
-    db.query(sql,finalParams,(err,result)=>{
-         if (err) {
-            console.log("Error In fetching Data")
+ 
+    db.query(`select count(*) as total from student  where ${condition.join(` ${operators} `)}`,[...params],(err,result)=>{
+        if (err) {
+            console.log(err);
             return res.send(err);
+            
         }
+     const totalDataSize=result[0].total;  
+     const pageSize= parseInt(process.env.PAGE_LIMIT);
+
+     const totalPages=Math.ceil(totalDataSize/pageSize);  
+    
+           console.log(result[0].total);
+        
+     let sql=`SELECT * From student where ${condition.join(` ${operators} `)}  order by ${sort} ${order} LIMIT ? OFFSET ?`;//write AND, OR INSTEAD Of oprator
+    let finalParams=[...params,pageSize,offset] //writing params because of multiple items in array like we write first name and last name
+    db.query(sql,finalParams,(err,result)=>{
+
+
         res.render("paginationContext",{
             student:result,
             currentPage,
             totalPages,
             sort,
             order,
-            search
+            search,
+            operators
         })
     });
-}
+  });
+               
+    
+   
+    
+} 
 else{
     let value=`%${search}%`;
-    let sql=`SELECT * FROM student where first_name LIKE ? OR last_name LIKE ? OR contact_number Like ? OR email LIKE ? OR city LIKE?`;
-    db.query(sql,[value,value,value,value,value],(err,result)=>{
+    let sql=`SELECT * FROM student where first_name LIKE ? OR last_name LIKE ? OR contact_number Like ? OR email LIKE ? OR city LIKE? order by ${sort} ${order} LIMIT ? OFFSET ?`;
+    db.query(sql,[value,value,value,value,value,pageSize,offset],(err,result)=>{
          if (err) {
             console.log("Error In fetching Data")
             return res.send("Database Error");
@@ -97,7 +118,8 @@ else{
             totalPages,
             sort,
             order,
-            search
+            search,
+            operators
         });
     })
 }

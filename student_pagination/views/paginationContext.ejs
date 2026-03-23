@@ -135,6 +135,10 @@ button.active {
     
     <h3> Student Records</h3>
     <h4 id="page"></h4>
+    <select name="operator" id="operatorID">
+     <option value="OR">OR</option>
+      <option value="AND">AND</option>
+    </select>
     <div id="search">
     <input type="text" id="searchInput" value="<%= search %>" placeholder="Search By Name">
     <input type="button" onclick="searchStudent()" value="submit">
@@ -187,6 +191,7 @@ button.active {
 
 <div id="pagination">
 
+     <button onclick="changePage(1)">First Page</button> 
     <% if (currentPage > 1) { %>
      <button onclick="changePage(<%= currentPage-1 %>)">Previous</button>
     <% } %>
@@ -211,24 +216,31 @@ button.active {
     let currentSort="<% sort %>";
     let currentOrder="<% order%>";
     let searchValue="<% search %>";
+    let operators="<% operators %>";
     document.getElementById('page').innerHTML= `Current Page is : <%= currentPage %>`;
 
     function changePage(page) {
-    window.location.href = `/?page=${page}&sort=${currentSort}&order=${currentOrder}&search=${searchValue}`;
+    let operator=document.getElementById("operatorID").value;
+    let name = document.getElementById("searchInput").value;
+    window.location.href = `/?page=${page}&search=${name}&sort=${currentSort}&order=${currentOrder}&operator=${operator}`;
+    
 } 
 
 function sortData(field, order) {
     currentSort = field;
     currentOrder = order;
-    window.location.href = `/?page=1&sort=${field}&order=${order}&search=${searchValue}`;
+     let operator=document.getElementById("operatorID").value;
+    let name = document.getElementById("searchInput").value;
+    window.location.href = `/?page=<%= currentPage %>&sort=${field}&order=${order}&search=${name}&operator=${operator}`;
 }
 
 function searchStudent() {
+    let operator=document.getElementById("operatorID").value;
     let name = document.getElementById("searchInput").value;
-    window.location.href = `/?page=1&search=${name}&sort=${currentSort}&order=${currentOrder}`;
+    window.location.href = `/?page=<%= currentPage %>&search=${name}&sort=${currentSort}&order=${currentOrder}&oprator=${operator}`;
 }
     
 
 </script>
 </body>
-</html> 
+</html>  

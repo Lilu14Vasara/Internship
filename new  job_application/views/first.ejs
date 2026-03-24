@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Hello From Ejs File</h3>
+
+
+ <% basic.forEach((element,i) => { %>
+    
+    <label><%= element.field_label %></label>
+    <label for=" <%= element.option_label  %>"><%= element.option_label  %></label>
+    <input type="<%= element.field_type %>" name="<%= element.field_name %>" value="<%= element.option_value %>" id="<%= element.option_idf %>">
+    <% }) %>
+
+    <form action="/submit-form" method="post"></form>
+</body>
+</html>
+ 

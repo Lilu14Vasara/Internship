@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation Checking</title>
+      <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+<style>
+    #cityTr{
+        align-items: end;
+    }
+    h1{
+        margin: 0 auto;
+        text-align: center;
+    }
+    span{
+        color: red;
+        font-size: 8px;
+    }
+  .input-error {
+    border: 1px solid red;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+form {
+    max-width: 1700px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+ 
+
+fieldset {
+    border: 1px solid #dcdde1;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 10px;
+    color: #2980b9;
+    font-size: 1.1rem;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 8px 5px;
+    vertical-align: middle;
+}
+
+
+input[type="text"],
+input[type="date"],
+input[type="currentCtc"], 
+select {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+
+#education, #workExperience {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#education td, #workExperience td {
+    border: 1px solid #eee;
+    padding: 10px;
+}
+
+#education tr:first-child, 
+#workExperience tr:first-child {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+input[type="submit"], 
+input[type="reset"] {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+input[type="submit"] {
+    background-color: #27ae60;
+    color: white;
+}
+
+input[type="submit"]:hover {
+    background-color: #219150;
+}
+
+input[type="reset"] {
+    background-color: #e74c3c;
+    color: white;
+    margin-left: 10px;
+}
+
+input[type="reset"]:hover {
+    background-color: #c0392b;
+}
+
+
+#cityTrr {
+    height: 50px;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+</style>
+
+<body>
+
+    <form id="jobApplication" action="/submit-form" method="post" >
+        <h1> Job Application Form</h1>
+        <br><br>
+        
+<fieldset id="basic">
+            <table >
+            <legend>Basic Detail</legend>
+    <tr>
+            <td><label> First Name</label></td>
+             <td><input type="text" id="firstName" name="first"></td>
+             <td><span id="firstError"></span></td>
+             <td> <label>Last Name</label></td> 
+            <td><input type="text" id="lastName" name="lastName"></td><br><br>
+         <td><span id="lastnameError"></span></td>
+    </tr>
+         
+    
+       
+    <tr>
+       <td><label>Designation</label></td>
+        <td><input type="text" id="designation" name="designation"></td>
+        <td><span id="designationError"></span></td>
+        <td><label>Address 1</label></td>
+        <td><input type="text" id="address1" name="address1"></td>
+        <td><span id="address1Error"></span></td>
+
+    </tr>
+
+    <tr>
+        <td><label>Email</label></td>
+        
+        <td><input type="text" id="email" name="email"></td>
+        <td><span id="emailError"></span></td>
+        <td><label>Address 2</label></td>
+        <td><input type="text" id="address2" name="address2"></td>
+        <td><span id="address2Error"></span></td>
+    </tr>
+    <tr id="cityTr">
+         <td><label>City</label></td>
+        <td><select id="city" name="city"><option>Select state first</option></select></td>
+        <td><span id="cityError"></span></td>
+    </tr>
+       <tr>
+        <td> <label>Phone Number</label></td>
+        <td><input type="text" id="phone" name="phone_number"></td>
+        <td><span id="phoneError"></span></td>
+       </tr>
+       <tr>
+        <td> <label>State</label></td>
+        <td> 
+            <select id="state" name="state">
+
+       </select></td>
+        <td><span id="stateError"></span></td>
+       </tr>
+       
+     <tr>
+        <td><label id="gender" >Gender   </label></td>
+        <td><span id="genderError"></span></td>
+        
+       
+        
+        <td> <label>  Zip code</label></td>
+        <td><input type="text" id="zipCode" name="zipCode"></td>
+         <td><span id="zipcodeError"></span></td>
+        </tr>
+        
+    <tr>
+        <td> <label>Relationship Status</label></td>
+        <td>        <select id="relation" name="relation">
+
+        </select></td>
+          <td><span id="relationError"></span></td>
+        <td> <label> Date Of Birth</label></td>
+        <td><input type="date" id="date" name="date"></td>
+          <td><span id="birthDateError"></span></td>
+    </tr>
+    
+ <tr><td><button type="button" onclick="education()">Next</button> </td></tr>
+ </table>
+  </fieldset><br><br>
+
+  <fieldset id="educationShow">
+    <legend>Education Details</legend>
+    
+    <table id="education" border="1">
+        <span id="educationRowError"></span>
+        <label>Add Row</label>
+         <button type="button" onclick="education_details()"> + </button>
+        <!-- <button type="button" onclick="createTable()"> + </button> -->
+        <label>Delete Row</label>
+        <button type="button" onclick="deleteRow()">-</button>
+        
+        <tr>
+            <td >No.</td>
+            <td>Course</td>
+            <td>Passing Year</td>
+            <td>Uni/Board</td>
+            <td>Result</td>
+        </tr><br>
+       
+        
+    </table><br><br>
+    <tr><td><button type="button" onclick="work()">Next</button></td>
+        <td><button type="button" onclick="basicDetailsShow()">Previous</button></td></tr>
+  </fieldset><br><br>
+
+  <fieldset id="workExperienceShow">
+    <legend>Work Experience</legend>
+
+   <table id="workExperience" border="1px">
+    <span id="workExperienceError"></span>
+    <label> Add Row</label>
+     <button type="button" onclick="workExperience() "> + </button>
+    <!-- <button type="button" onclick="createWorkTable()">+</button> -->
+    <label>Delete Row</label>
+        <button type="button" onclick="deleteWorkRow()">-</button>
+        <tr>
+            <td>No.</td>
+            <td>Company name</td>
+            <td>From</td>
+            <td>To</td>
+            <td>Annual Package</td>
+            <td>Reason to leave</td>
+            <td>Contact NO.</td>
+            <td>ref Ct. Name</td>
+        </tr>
+
+    </table><br><br>
+   <tr> <button type="button" onclick="lan()">Next</button>
+    <td><button type="button" onclick="education()">Previous</button></td></tr>
+  </fieldset><br><br>
+
+  <fieldset id="languageShow">
+    <legend>Language Known</legend>
+    <table id="languageTable">
+    </table>
+    <span id="languageError"></span>
+   <button type="button" onclick="tech()">Next</button>
+     <button type="button" onclick="work()">Previous</button>
+  </fieldset><br><br>
+
+  <fieldset id="technologyShow">
+
+    <legend>Technologies You Know</legend>
+    
+    <table id="technologiesTable"></table>
+    
+    <span id="TechnologyError"></span>
+    <br><br>
+    <button type="button" onclick="ref()">Next</button>
+    <button type="button" onclick="lan()">Previous</button>
+    </fieldset>
+
+  <fieldset id="referanceShow">
+    <legend>Referance Contact</legend>
+    <table>
+        <tr>
+            <td>  <label for="name">Name</label></td>
+            <td> <input type="text" id="refrenceName" name="refrenceName"></td>
+            <td><span id="refrenceNameError"></span></td>
+            <td> <label for="contactNo">Contact Number</label></td>
+            <td><input type="text" id="refrenceCon" name="refrenceCon"></td>
+             <td><span id="refrenceContactError"></span></td>
+            <td><label for="contactNo">Relation</label></td>
+            <td>  <input type="text" id="refrenceRel" name="refrenceRel"></td>
+             <td><span id="refrenceRelError"></span></td>
+         </tr>
+        
+    </table><br><br>
+    <button type="button" onclick="pref()">Next</button>
+    <button type="button" onclick="tech()">Previous</button>
+  </fieldset><br><br>
+
+  <fieldset id="preferancesShow">
+    <legend> Preferances</legend>
+    <table>
+      <tr>
+        <td>Preferd location</td>
+        <td> <select id="preferances" name="location" multiple >
+            <option value="ahemdabad">Ahemdabad</option>
+            <option value="gandhinagar">Gandhinagar</option>
+            <option value="anand">Anand</option>
+            <option value="surat">Surat</option>
+            <option value="bhavnagar">Bhavnagar</option>
+        </select>
+        </td>
+        <td><span id="preferancesError"></span></td>
+        <td>   <table>
+                  <tr>  <td>Notice Period</td>
+                <td><input type="text" id="noticPeriod" name="noticePeriod"></td>
+                <td><span id="noticPeriodError"></span></td>
+            </tr>
+                  <tr>  <td>Expected CTC </td>
+                <td><input type="text" id="expectedCtc" name="expectedCtc"> </td>
+             <td><span id="expectedCTCError"></span></td></tr>
+                  <tr>  <td>Current CTC</td>
+                  <td><input type="currentCtc" id="currentCtc" name="currentCtc"></td>
+                 <td><span id="currentCtcError"></span></td></tr>
+              </table>
+        </td>
+        <td> <label for="department">Department</label></td>
+        <td><select id="department" name="department">
+            <option value="devlopment">Devlopment</option>
+            <option id="design">Design</option>
+            <option id="marketing">Maeketing</option>
+            </select>
+        </td>
+        <td><span id="departmentError"></span></td>
+    </tr>
+   
+    </table><br><br>
+    <button type="button" onclick="ref()">Previous</button>
+  </fieldset><br><br>
+
+<table id="button">
+
+    <tr>
+        <td><input type="submit" id="submitbtn"  value="Submit"></td>
+        <td><input type="reset" id="resetbtn" value="Reset"></td>
+    </tr>
+</table>
+
+
+    </form>
+
+    <script>
+
+    window.onload = function(){
+        comboLoad();
+        basicDetailsShow();
+        // language();
+        technology();
+        education_details();
+        workExperience();
+}
+ async function comboLoad() {
+        try{
+        const res=await fetch(`/combobox`);
+        let data= await res.json();
+        let fields=data.fields;
+        console.log(fields);
+        
+
+        fields.forEach(element=>{
+            if (element.field_name==='state') {
+             let select=document.getElementById('state');
+             
+            element.options.forEach(opt=>{
+              let option=document.createElement('option');
+              option.value=opt.value;
+             option.text=opt.value ;
+             select.appendChild(option)
+            })
+
+          }
+
+             if (element.field_type==='radio') {
+             let gender=document.getElementById('gender');
+               
+            element.options.forEach(opt=>{
+                let label=document.createElement('label');
+                label.innerText=opt.value;
+              let input=document.createElement('input');
+              input.type=element.field_type;
+              input.name=element.field_name;
+              input.id=opt.value;
+              input.value=opt.value;
+
+            gender.appendChild(label);
+             gender.appendChild(input);
+             
+            })
+
+          }
+
+            if (element.field_name==='relationsjip_status') {
+             let relation=document.getElementById('relation');
+             
+            element.options.forEach(opt=>{
+              let option=document.createElement('option');
+              option.value=opt.value;
+             option.text=opt.value ;
+             relation.appendChild(option)
+            })
+
+          }
+
+             if (element.field_name==='course') {
+             let select=document.getElementById('course');
+             
+            element.options.forEach(opt=>{
+              let option=document.createElement('option');
+              option.value=opt.value;
+             option.text=opt.value ;
+             select.appendChild(option)
+             ;
+            })
+
+          }
+
+          if (element.field_type==='checkbox') {
+            let table=document.getElementById('languageTable');
+               
+            element.options.forEach(opt=>{
+            
+            let label=document.createElement('label');
+            label.innerText=opt.value;
+              let input=document.createElement('input');
+              input.type=element.field_type;
+              input.name=opt.value;
+              input.id=opt.value;
+              input.value=opt.value;
+              table.appendChild(input);
+              table.appendChild(label);
+
+            })
+
+          }
+
+        });
+      }catch(err){
+        console.log(`Error in Fetching data`,err);   
+      }   
+    }       
+    
+
+function basicDetailsShow(){
+     const basic= document.getElementById('basic');
+   const education= document.getElementById('educationShow');
+   const workExperience= document.getElementById('workExperienceShow');
+   const language= document.getElementById('languageShow');
+   const technology= document.getElementById('technologyShow');
+   const refrence= document.getElementById('referanceShow');
+   const preferances= document.getElementById('preferancesShow');
+   const button=document.getElementById('button');
+   basic.style.display='flex';
+   education.style.display='none';
+   workExperience.style.display='none';
+    language.style.display='none';
+   technology.style.display='none';
+    refrence.style.display='none';
+   preferances.style.display='none';
+   button.style.display='none';
+   
+}
+function education(){
+   const basic= document.getElementById('basic');
+   const education= document.getElementById('educationShow');
+   const workExperience= document.getElementById('workExperienceShow');
+
+    education.style.display='flex';
+     basic.style.display='none';
+    workExperience.style.display='none';
+ 
+}
+function work(){
+
+    const education= document.getElementById('educationShow');
+    const workExperience= document.getElementById('workExperienceShow');
+     const language= document.getElementById('languageShow');
+    education.style.display='none';
+    workExperience.style.display='flex';
+    language.style.display='none'
+
+}
+function lan() {
+    const workExperience= document.getElementById('workExperienceShow');
+     const language= document.getElementById('languageShow');
+      const technology= document.getElementById('technologyShow');
+    workExperience.style.display='none';
+    language.style.display='flex';
+    technology.style.display='none';
+
+}
+function tech() {
+    const language= document.getElementById('languageShow');
+   const technology= document.getElementById('technologyShow');
+   const refrence= document.getElementById('referanceShow');
+
+     language.style.display='none';
+   technology.style.display='flex';
+   refrence.style.display='none';
+
+}
+function ref() {
+     const technology= document.getElementById('technologyShow');
+     const refrence= document.getElementById('referanceShow');
+     const preferances= document.getElementById('preferancesShow');
+   
+
+   technology.style.display='none';
+    refrence.style.display='flex';
+    preferances.style.display='none'
+}
+function pref(){
+    const refrence= document.getElementById('referanceShow');
+   const preferances= document.getElementById('preferancesShow');
+   const button=document.getElementById('button');
+
+    refrence.style.display='none';
+   preferances.style.display='flex';
+    button.style.display='flex';
+}
+const stateMap={
+            Gujrat:["Ahemdabad",'Surat','Bhavnagr','Jamnagar'],
+            Rajshan:["Jaipur",'Udaipur','Jodhpur'],
+            Maharastra:["Mharastra",'Mumbai']
+        }
+    
+        document.getElementById('state').addEventListener("change",function(){
+            const state=this.value;
+
+             const cityDropDown=document.getElementById('city');
+            cityDropDown.innerHTML=`<option value="">Select City</option>`;
+
+            if (stateMap[state]) {
+                stateMap[state].forEach(city => {
+                    let option=document.createElement('option');
+                    option.value=city;
+                    option.text=city;
+
+                    cityDropDown.appendChild(option)
+                });
+            }
+        })
+
+
+function education_details() {
+ 
+    let container = document.getElementById('education');
+    let newRow = `<tr>
+        <td><input type="text"></td>  
+        
+        <td> <select id="course" name="course[]"  >
+        </select></td>
+        <td><input type="text" name="passingYear[]"></td>
+        <td><input type="text" name="board[]"></td>
+        <td><input type="text" name="percentage[]"></td>
+    </tr>`;
+    container.insertAdjacentHTML('beforeend', newRow);
+}
+
+function workExperience() {
+    
+    let container = document.getElementById('workExperience');
+    let newRow = `<tr>
+        <td><input type="number"></td>  
+        <td><input type="text" name="companyName[]"></td>
+        <td><input type="date" name="fromDate[]"></td>
+        <td><input type="date" name="toDate[]"></td>
+        <td><input type="number" name="annualPackage[]"></td>
+        <td><input type="text" name="reasonTolive[]"></td>
+        <td><input type="number" name="contactNo[]"></td>
+        <td><input type="text" name="refCtName[]"></td>
+    </tr>`;
+    container.insertAdjacentHTML('beforeend', newRow);
+}
+
+
+  function deleteRow() {
+      let container=document.getElementById('education');
+      if (!container) return;
+      let rowCount = container.rows.length;
+      console.log(rowCount);
+      
+      if (rowCount > 0) {
+          container.deleteRow(rowCount - 1);
+      }
+  }
+  
+
+  
+  function deleteWorkRow(){
+      let container=document.getElementById('workExperience');
+      if (!container) return;
+      let rowCount = container.rows.length;
+      console.log(rowCount);
+      
+      if (rowCount > 0) {
+          container.deleteRow(rowCount - 1);
+      }
+  }
+  
+  
+//   function language() {
+//       let table=document.getElementById('languageTable');
+//       table.style.width="100px";
+//       let languageArr=["Hindi","English","Gujrati"];
+//       let skillArr=["Read","Write","Speak"]
+//    for (let i = 0; i < languageArr.length; i++) {
+//      let row=document.createElement('tr');
+//      let td=document.createElement('td');
+    
+//   td.innerHTML =languageArr[i];
+//    td.innerHTML +=`<input type="checkbox" name='${languageArr[i]}'>`
+//      row.appendChild(td);
+  
+//      for (let j = 0; j < skillArr.length; j++) {
+      
+//       let td=document.createElement('td');
+//       td.innerHTML=`<label> ${skillArr[j]} </label>
+//       <input type="checkbox"  name='${languageArr[i]}_${skillArr[j]}'>`
+  
+//       row.appendChild(td)
+  
+//      }
+//      table.appendChild(row)
+      
+//    }   
+   
+//   }
+
+  
+  function technology(){
+      let table= document.getElementById('technologiesTable');
+      let techArr=["PHP","Mysql","larave","Oracle"];
+      let levelArr=["Beginer","Mideator","Expert"]
+      table.innerHTML="";
+       for (let i = 0; i < techArr.length; i++) {
+     let row=document.createElement('tr');
+     let td=document.createElement('td');
+    
+     td.innerHTML =techArr[i];
+   td.innerHTML += `<input type="checkbox" name="tech_check" value="${techArr[i]}">`;
+     row.appendChild(td);
+  
+     for (let j = 0; j < levelArr.length; j++) {
+      
+      let td=document.createElement('td');
+      td.innerHTML=`<label> ${levelArr[j]} </label>
+      <input type="radio" name='${techArr[i]}' class='toggle-radio' value='${levelArr[j]}'>`
+  
+      row.appendChild(td)
+  
+     }
+     table.appendChild(row)
+  
+  }
+
+  }
+  technology();
+    document.addEventListener("mousedown",(e)=>{
+    if (e.target.classList.contains("toggle-radio")) {
+        e.target.wasChecked=e.target.checked;
+    }
+  });
+  document.addEventListener("click",(e)=>{
+    if (e.target.classList.contains('toggle-radio')) {
+        if (e.target.wasChecked) {
+            e.target.checked=false
+        }
+        else{
+            e.target.wasChecked=true
+        }
+    }
+  });
+  
+
+  
+  
+  let submitbtn=document.getElementById('submitbtn');
+  let resetbtn=document.getElementById('resetbtn');
+  let jobApplication=document.getElementById('jobApplication');
+  submitbtn.addEventListener("click",(e)=>{
+       let isValid = true;
+  
+   let firstName= document.getElementById("firstName");
+   let lastName= document.getElementById('lastName');
+   let designation= document.getElementById('designation')
+   let address1= document.getElementById('address1');
+   let email= document.getElementById('email');
+   let address2= document.getElementById('address2');
+   let city= document.getElementById('city');
+   let phone= document.getElementById('phone');
+   let state= document.getElementById('state');
+   let zipCode= document.getElementById('zipCode');
+   let date= document.getElementById('date');
+   let male= document.getElementById('male');
+   let female= document.getElementById('female');
+   let relationshipstatus= document.getElementById("relation");
+  
+  
+  
+   let emailPattern=/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+   let mobilePattern=/[0-9]{10}/;
+   
+   
+  
+      if (firstName.value.trim()=="") {
+          let span=document.getElementById('firstError');
+          span.innerHTML="first name is require";
+           firstName.classList.add('input-error');
+           isValid=false;
+      }
+       else {
+          let span=document.getElementById('firstError');
+          span.innerHTML = "";
+          firstName.classList.remove('input-error');
+          
+      }
+  
+  
+      if (lastName.value.trim()=="") {
+          let span=document.getElementById('lastnameError');
+           span.innerHTML="last name is require";
+           lastName.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('lastnameError');
+          span.innerHTML = "";
+          lastName.classList.remove('input-error');
+         
+      }
+     
+      if (designation.value.trim()=="") {
+          let span=document.getElementById('designationError');
+           span.innerHTML="Designation is require";
+           designation.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('designationError');
+          span.innerHTML = "";
+          designation.classList.remove('input-error');
+         
+      }
+          if (address1.value.trim()=="") {
+          let span=document.getElementById('address1Error');
+           span.innerHTML="Address1 is require";
+           address1.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('address1Error');
+          span.innerHTML = "";
+          address1.classList.remove('input-error');
+         
+      }
+      if (email.value.trim()=="") {
+          let span=document.getElementById('emailError');
+           span.innerHTML="Email is require";
+           email.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('emailError');
+          span.innerHTML = "";
+          email.classList.remove('input-error');
+         
+      }
+          if (!emailPattern.test(email.value)) {
+          let span=document.getElementById('emailError');
+           span.innerHTML="Please Enter Valid email"
+           email.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('emailError');
+          span.innerHTML = "";
+          email.classList.remove('input-error');
+         
+      }
+          if (address2.value.trim()=="" && address1.value.trim()=="") {
+          let span=document.getElementById('address2Error');
+           span.innerHTML="one address is require compulsory";
+           address2.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('address2Error');
+          span.innerHTML = "";
+          address2.classList.remove('input-error');
+         
+      }
+         if (city.value.trim()=="") {
+          let span=document.getElementById('cityError');
+           span.innerHTML="City Name is require";
+           city.classList.add('input-error');
+          isValid=false
+      }
+       else {
+           let span=document.getElementById('cityError');
+          span.innerHTML = "";
+          city.classList.remove('input-error');
+         
+      }
+       if (phone.value.trim()=="") {
+          let span=document.getElementById('phoneError');
+           span.innerHTML="Phone number is require";
+           phone.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('phoneError');
+          span.innerHTML = "";
+          phone.classList.remove('input-error');
+         
+      }
+           if (!mobilePattern.test(phone.value)) {
+          let span=document.getElementById('phoneError');
+           span.innerHTML="Please Enter correct Mobile Number";
+           phone.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('phoneError');
+          span.innerHTML = "";
+          phone.classList.remove('input-error');
+         
+      }
+  
+          if (state.value==="") {
+          let span=document.getElementById('stateError');
+           span.innerHTML="Please select state";
+          
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('stateError');
+          span.innerHTML = "";
+         
+         
+      }
+  
+      if (zipCode.value=="") {
+          let span=document.getElementById('zipcodeError');
+           span.innerHTML="ZipCode is require";
+           zipCode.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('zipcodeError');
+          span.innerHTML = "";
+          zipCode.classList.remove('input-error');
+         
+      }
+  
+      
+        if (!male.checked && !female.checked) {
+            let span = document.getElementById('genderError');
+            span.innerHTML = "Please select Gender";
+            isValid = false;
+        } 
+        else {
+            let span = document.getElementById('genderError');
+            span.innerHTML = "";
+        }
+  
+      if (relationshipstatus.value=="") {
+          let span=document.getElementById('relationError');
+           span.innerHTML="Please select Relationship status";
+           relationshipstatus.classList.add('input-error');
+          isValid=false
+      }
+       else {
+           let span=document.getElementById('relationError');
+          span.innerHTML = "";
+          relationshipstatus.classList.remove('input-error');
+         
+      }
+  
+      if (date.value == "") {
+        let span = document.getElementById('birthDateError');
+        span.innerHTML = "Please select Date of Birth";
+        date.classList.add('input-error');
+        isValid = false;
+    } 
+    else {
+    
+        let birthDate = new Date(date.value);
+        let today = new Date();
+    
+        if (birthDate >= today) {
+            let span = document.getElementById('birthDateError');
+            span.innerHTML = "Please select correct Date of Birth";
+            date.classList.add('input-error');
+            isValid = false;
+        }
+        else {
+            let span = document.getElementById('birthDateError');
+            span.innerHTML = "";
+            date.classList.remove('input-error');
+        }
+    }
+
+
+
+let educationTable = document.getElementById("education");
+let educationError = document.getElementById("educationRowError");
+
+let totalRows = educationTable.rows.length;
+
+if (totalRows < 4) {  
+    educationError.innerHTML = "Please enter atleast 10th, 12th and Graduation details";
+    isValid = false;
+}
+else {
+
+    let isEducationValid = true;
+    for (let i = 1; i < totalRows; i++) {
+        let cells = educationTable.rows[i].cells;
+        for (let j = 0; j < cells.length; j++) {
+
+            let value = cells[j].innerText.trim();
+
+            if (cells[j].querySelector("input")) {
+                value = cells[j].querySelector("input").value.trim();
+            }
+
+            if (value === "") {
+                isEducationValid = false;
+            }
+        }
+    }
+
+    // if (!isEducationValid) {
+    //     educationError.innerHTML = "Please fill all education fields";
+    //     isValid = false;
+    // }
+    // else {
+    //     educationError.innerHTML = "";
+    // }
+}
+
+
+
+let workTable = document.getElementById("workExperience");
+let workError = document.getElementById("workExperienceError");
+
+let totalWorkRows = workTable.rows.length;
+
+if (totalWorkRows <= 1) {
+    workError.innerHTML = "Please add at least one work experience if you have no experience then write about your last internship";
+    isValid = false;
+}
+else {
+
+    let workValid = true;
+
+    for (let i = 1; i < totalWorkRows; i++) {
+
+        let cells = workTable.rows[i].cells;
+
+        for (let j = 1; j < cells.length; j++) {
+
+            let value = "";
+
+            if (cells[j].querySelector("input")) {
+                value = cells[j].querySelector("input").value.trim();
+            } else {
+                value = cells[j].innerText.trim();
+            }
+
+            if (value === "") {
+                workValid = false;
+            }
+        }
+    }
+
+    if (!workValid) {
+        workError.innerHTML = "Please fill all work experience fields";
+        isValid = false;
+    }
+    else {
+        workError.innerHTML = "";
+    }
+}
+  
+      
+let languageError = document.getElementById("languageError");
+
+let languageSelected = false;
+let skillValid = true;
+
+let languages = ["Hindi","English","Gujrati"];
+let skills = ["Read","Write","Speak"];
+
+for (let i = 0; i < languages.length; i++) {
+
+    let lang = document.querySelector(`input[name='${languages[i]}']`);
+
+    if (lang && lang.checked) {
+
+        languageSelected = true;
+        let skillChecked = false;
+
+        for (let j = 0; j < skills.length; j++) {
+
+            let skill = document.querySelector(`input[name='${languages[i]}_${skills[j]}']`);
+
+            if (skill && skill.checked) {
+                skillChecked = true;
+            }
+        }
+
+        if (!skillChecked) {
+            skillValid = false;
+        }
+    }
+}
+
+if (!languageSelected) {
+    languageError.innerHTML = "Please select at least one language";
+    isValid = false;
+}
+else if (!skillValid) {
+    languageError.innerHTML = "Please select at least one skill (Read/Write/Speak)";
+    isValid = false;
+}
+else {
+    languageError.innerHTML = "";
+}
+
+
+
+let techError = document.getElementById("TechnologyError");
+let techChosen = false;
+let levelSelected = true;
+
+let checkedBoxes = document.querySelectorAll('input[name="tech_check"]:checked');
+
+if (checkedBoxes.length > 0) {
+    techChosen = true;
+
+    checkedBoxes.forEach(checkbox => {
+        let techName = checkbox.value;
+        let radioChecked = document.querySelector(`input[type="radio"][name="${techName}"]:checked`);
+
+        if (!radioChecked) {
+            levelSelected = false;
+        }
+    });
+}
+
+if (!techChosen) {
+    techError.innerHTML = "Please select at least one technology";
+    isValid = false;
+} else if (!levelSelected) {
+    techError.innerHTML = "Please select technology level (Beginer / Mideator / Expert)";
+    isValid = false;
+} else {
+    techError.innerHTML = "";
+}
+
+
+  let refrenceName=document.getElementById('refrenceName');
+  let refrenceContact=document.getElementById('refrenceCon');
+  let refrenceRelation=document.getElementById('refrenceRel');
+  
+      if (refrenceName.value=="") {
+          let span=document.getElementById('refrenceNameError');
+           span.innerHTML="Refrence Name is Require if you have no refrence than write null";
+           refrenceName.classList.add('input-error');
+          isValid=false
+      }
+       else {
+           let span=document.getElementById('refrenceNameError');
+          span.innerHTML = "";
+          refrenceName.classList.remove('input-error');
+      }
+          if (refrenceContact.value=="") {
+          let span=document.getElementById('refrenceContactError');
+           span.innerHTML="Refrence Contact is Require if you have no refrence than write null";
+           refrenceContact.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('refrenceContactError');
+          span.innerHTML = "";
+          refrenceContact.classList.remove('input-error');
+      }
+  
+   if (!mobilePattern.test(refrenceContact.value)) {
+          let span=document.getElementById('refrenceContactError');
+           span.innerHTML="Please Enter correct Refrence Number";
+           refrenceContact.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('refrenceContactError');
+          span.innerHTML = "";
+          refrenceContact.classList.remove('input-error');
+         
+      }
+  
+             if (refrenceRelation.value=="") {
+          let span=document.getElementById('refrenceRelError');
+           span.innerHTML="Refrence Relation is Require if you have no refrence than write null";
+           refrenceRelation.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('refrenceRelError');
+          span.innerHTML = "";
+          relationshipstatus.classList.remove('input-error');
+      }
+  
+  
+  
+  let preferances=document.getElementById('preferances');
+  let noticePeriod=document.getElementById('noticPeriod');
+  let expectedCTC=document.getElementById('expectedCtc');
+  let currentCTc=document.getElementById('currentCtc');
+  let department=document.getElementById('department');
+  
+      if (preferances.value=="") {
+          let span=document.getElementById('preferancesError');
+           span.innerHTML="Preferances Name is Require ";
+           preferances.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('preferancesError');
+          span.innerHTML = "";
+          preferances.classList.remove('input-error');
+      }
+  
+  
+      if (noticePeriod.value=="") {
+          let span=document.getElementById('noticPeriodError');
+           span.innerHTML="Please enter Your Notice Period";
+           noticePeriod.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('noticPeriodError');
+          span.innerHTML = "";
+          noticePeriod.classList.remove('input-error');
+      }
+  
+          if (expectedCTC.value=="") {
+          let span=document.getElementById('expectedCTCError');
+           span.innerHTML="Please enter Your Expected CTC";
+           expectedCTC.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('expectedCTCError');
+          span.innerHTML = "";
+          expectedCTC.classList.remove('input-error');
+      }
+          if (currentCTc.value=="") {
+          let span=document.getElementById('currentCtcError');
+           span.innerHTML="Please enter Your Current CTC";
+           currentCTc.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('noticPeriodError');
+          span.innerHTML = "";
+          currentCTc.classList.remove('input-error');
+      }
+  
+  
+              if (department.value=="") {
+          let span=document.getElementById('departmentError');
+           span.innerHTML="Please Select Your Department";
+           department.classList.add('input-error');
+          isValid=false
+      }
+       else {
+          let span=document.getElementById('departmentError');
+          span.innerHTML = "";
+          department.classList.remove('input-error');
+      }
+   
+  
+  if(!isValid){
+     e.preventDefault();
+  }
+  })
+   
+   </script>
+</body>
+</html>
+
+

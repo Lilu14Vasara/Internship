@@ -37,6 +37,21 @@ h1 {
     letter-spacing: 1px;
 }
 
+fieldset {
+    display: none;
+    flex-direction: column;
+}
+
+fieldset.active {
+    display: flex;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
 form {
     max-width: 1700px;
     margin: 0 auto;
@@ -205,7 +220,7 @@ label {
     </tr>
     <tr id="cityTr">
          <td><label>City</label></td>
-        <td><select id="city" name="city"><option>Select state first</option></select></td>
+        <td><input type="text" name="city" id="city"></td>
         <td><span id="cityError"></span></td>
     </tr>
        <tr>
@@ -244,8 +259,11 @@ label {
           <td><span id="birthDateError"></span></td>
     </tr>
     
- <tr><td><button type="button" onclick="education()">Next</button> </td></tr>
+ 
  </table>
+ <div class="button-group">
+    <button type="button" onclick="education()">Next</button>
+</div>
   </fieldset><br><br>
 
   <fieldset id="educationShow">
@@ -269,8 +287,10 @@ label {
        
         
     </table><br><br>
-    <tr><td><button type="button" onclick="work()">Next</button></td>
-        <td><button type="button" onclick="basicDetailsShow()">Previous</button></td></tr>
+    <div class="button-group">
+        <button type="button" onclick="work()">Next</button>
+        <button type="button" onclick="basicDetailsShow()">Previous</button>
+    </div>
   </fieldset><br><br>
 
   <fieldset id="workExperienceShow">
@@ -295,8 +315,10 @@ label {
         </tr>
 
     </table><br><br>
-   <tr> <button type="button" onclick="lan()">Next</button>
-    <td><button type="button" onclick="education()">Previous</button></td></tr>
+    <div class="button-group">
+        <button type="button" onclick="lan()">Next</button>
+        <button type="button" onclick="education()">Previous</button>
+    </div>
   </fieldset><br><br>
 
   <fieldset id="languageShow">
@@ -304,8 +326,10 @@ label {
     <table id="languageTable">
     </table>
     <span id="languageError"></span>
-   <button type="button" onclick="tech()">Next</button>
-     <button type="button" onclick="work()">Previous</button>
+    <div class="button-group">
+        <button type="button" onclick="tech()">Next</button>
+        <button type="button" onclick="work()">Previous</button>
+    </div>
   </fieldset><br><br>
 
   <fieldset id="technologyShow">
@@ -316,8 +340,10 @@ label {
     
     <span id="TechnologyError"></span>
     <br><br>
-    <button type="button" onclick="ref()">Next</button>
-    <button type="button" onclick="lan()">Previous</button>
+    <div class="button-group">
+        <button type="button" onclick="ref()">Next</button>
+        <button type="button" onclick="lan()">Previous</button>
+    </div>
     </fieldset>
 
   <fieldset id="referanceShow">
@@ -336,8 +362,10 @@ label {
          </tr>
         
     </table><br><br>
-    <button type="button" onclick="pref()">Next</button>
-    <button type="button" onclick="tech()">Previous</button>
+    <div class="button-group">
+        <button type="button" onclick="pref()">Next</button>
+        <button type="button" onclick="tech()">Previous</button>
+    </div>
   </fieldset><br><br>
 
   <fieldset id="preferancesShow">
@@ -378,7 +406,9 @@ label {
     </tr>
    
     </table><br><br>
-    <button type="button" onclick="ref()">Previous</button>
+    <div class="button-group">
+        <button type="button" onclick="ref()">Previous</button>
+    </div>
   </fieldset><br><br>
 
 <table id="button">
@@ -398,10 +428,10 @@ label {
         comboLoad();
         basicDetailsShow();
         // language();
-        technology();
+        // technology();
         education_details();
         workExperience();
-}
+} 
  async function comboLoad() {
         try{
         const res=await fetch(`/combobox`);
@@ -423,9 +453,9 @@ label {
 
           }
 
-             if (element.field_type==='radio') {
+             if (element.field_name==='gender') {
              let gender=document.getElementById('gender');
-               
+            //    let td=document.createElement('td');
             element.options.forEach(opt=>{
                 let label=document.createElement('label');
                 label.innerText=opt.value;
@@ -437,7 +467,7 @@ label {
 
             gender.appendChild(label);
              gender.appendChild(input);
-             
+            //  gender.appendChild(td)
             })
 
           }
@@ -467,26 +497,130 @@ label {
 
           }
 
-          if (element.field_type==='checkbox') {
-            let table=document.getElementById('languageTable');
+        // if (element.field_name === 'language') {
+        //     let table = document.getElementById('languageTable');
+        //     for (let i = 0; i < element.options.length; i += 4) {
+        //         let tr = document.createElement('tr');
+                  
+        //             let input = document.createElement('input');
+        //             input.type = 'checkbox';
+        //             input.name = `${element.options[i].value}`;
+        //             input.value = `${element.options[i]}`
+                
+        //         let label = document.createElement('label');
+        //         label.innerText = element.options[i].value;
+        //          tr.appendChild(input);
+        //         tr.appendChild(label);
                
-            element.options.forEach(opt=>{
-            
-            let label=document.createElement('label');
-            label.innerText=opt.value;
-              let input=document.createElement('input');
-              input.type=element.field_type;
-              input.name=opt.value;
-              input.id=opt.value;
-              input.value=opt.value;
-              table.appendChild(input);
-              table.appendChild(label);
+        //         for (let j = 1; j <= 3; j++) {
+        //             let td = document.createElement('td');
+        //             let skill = element.options[i + j].value;
+        //             let id = `${element.options[i].value}_${skill}`;
 
-            })
+        //             let input = document.createElement('input');
+        //             input.type = 'checkbox';
+        //             input.id = id;
+        //             input.name = `${element.options[i].value}_${skill}`;
+        //             input.value = skill;
 
-          }
+        //             let label = document.createElement('label');
+        //             label.innerText = skill;
+        //             label.htmlFor = id;
+
+        //             td.appendChild(input);
+        //             td.appendChild(label);
+        //             tr.appendChild(td);
+        //         }
+
+        //         table.appendChild(tr);
+        //     }
+        // }
+
+        let langArr = [];
+let levelArr = [];
+
+fields.forEach(element => {
+    if (element.field_name === 'language') {
+        langArr = element.options.map(o => o.value);
+    }
+
+    if (element.field_name === 'lang_level') {
+        levelArr = element.options.map(o => o.value);
+    }
+});
+
+
+if (langArr.length && levelArr.length) {
+    let table = document.getElementById('languageTable');
+    table.innerHTML = "";
+
+    langArr.forEach(lang => {
+        let tr = document.createElement('tr');
+
+      
+        let td1 = document.createElement('td');
+        td1.innerHTML = `${lang}
+            <input type="checkbox" name="language" value="${lang}">`;
+        tr.appendChild(td1);
+
+        
+        levelArr.forEach(level => {
+            let td = document.createElement('td');
+            td.innerHTML = `
+                <label>${level}</label>
+                <input type="radio" name="${lang}" value="${level}">
+            `;
+            tr.appendChild(td);
+        });
+
+        table.appendChild(tr);
+    });
+}
+
+        let techArr = [];
+let skillArr = [];
+
+fields.forEach(element => {
+    if (element.field_name === 'technology') {
+        techArr = element.options.map(o => o.value);
+    }
+
+    if (element.field_name === 'skill') {
+        skillArr = element.options.map(o => o.value);
+    }
+});
+
+
+if (techArr.length && skillArr.length) {
+    let table = document.getElementById('technologiesTable');
+    table.innerHTML = "";
+
+    techArr.forEach(tech => {
+        let tr = document.createElement('tr');
+
+        
+        let td1 = document.createElement('td');
+        td1.innerHTML = `${tech} 
+            <input type="checkbox" name="tech_check" value="${tech}">`;
+        tr.appendChild(td1);
+
+       
+        skillArr.forEach(skill => {
+            let td = document.createElement('td');
+            td.innerHTML = `
+                <label>${skill}</label>
+                <input type="radio" name="${tech}" value="${skill}">
+            `;
+            tr.appendChild(td);
+        });
+
+        table.appendChild(tr);
+    });
+}
+        
 
         });
+        
       }catch(err){
         console.log(`Error in Fetching data`,err);   
       }   
@@ -680,34 +814,34 @@ function workExperience() {
 //   }
 
   
-  function technology(){
-      let table= document.getElementById('technologiesTable');
-      let techArr=["PHP","Mysql","larave","Oracle"];
-      let levelArr=["Beginer","Mideator","Expert"]
-      table.innerHTML="";
-       for (let i = 0; i < techArr.length; i++) {
-     let row=document.createElement('tr');
-     let td=document.createElement('td');
+//   function technology(){
+//       let table= document.getElementById('technologiesTable');
+//       let techArr=["PHP","Mysql","larave","Oracle"];
+//       let levelArr=["Beginer","Midiator","Expert"]
+//       table.innerHTML="";
+//        for (let i = 0; i < techArr.length; i++) {
+//      let row=document.createElement('tr');
+//      let td=document.createElement('td');
     
-     td.innerHTML =techArr[i];
-   td.innerHTML += `<input type="checkbox" name="tech_check" value="${techArr[i]}">`;
-     row.appendChild(td);
+//      td.innerHTML =techArr[i];
+//    td.innerHTML += `<input type="checkbox" name="tech_check" value="${techArr[i]}">`;
+//      row.appendChild(td);
   
-     for (let j = 0; j < levelArr.length; j++) {
+//      for (let j = 0; j < levelArr.length; j++) {
       
-      let td=document.createElement('td');
-      td.innerHTML=`<label> ${levelArr[j]} </label>
-      <input type="radio" name='${techArr[i]}' class='toggle-radio' value='${levelArr[j]}'>`
+//       let td=document.createElement('td');
+//       td.innerHTML=`<label> ${levelArr[j]} </label>
+//       <input type="radio" name='${techArr[i]}' class='toggle-radio' value='${levelArr[j]}'>`
   
-      row.appendChild(td)
+//       row.appendChild(td)
   
-     }
-     table.appendChild(row)
+//      }
+//      table.appendChild(row)
   
-  }
+//   }
 
-  }
-  technology();
+//   }
+//   technology();
     document.addEventListener("mousedown",(e)=>{
     if (e.target.classList.contains("toggle-radio")) {
         e.target.wasChecked=e.target.checked;
